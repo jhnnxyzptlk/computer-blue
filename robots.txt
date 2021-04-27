@@ -1,1 +1,1 @@
-Sitemap: https://www.jhnn.xyz/blog/sitemap.xml
+Sitemap: https://www.jhnn.xyz/sitemap.xml
