@@ -4,8 +4,8 @@ title: About Me
 permalink: /about/
 ---
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
+Johann Augustine is an engineer, designer and futurist. 
 
+Johann studied engineering and physics without receiving a degree, gaining practical experience from open source projects. 
 
-
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
+🏗️ 🚧
