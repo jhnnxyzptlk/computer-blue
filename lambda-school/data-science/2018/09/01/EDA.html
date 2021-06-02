@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Exploratory Data Analysis | Johann Augustine</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Exploratory Data Analysis" />
+<meta name="author" content="Johann Augustine" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="First steps in exploration" />
+<meta property="og:description" content="First steps in exploration" />
+<link rel="canonical" href="https://www.jhnn.xyz/lambda-school/data-science/2018/09/01/EDA.html" />
+<meta property="og:url" content="https://www.jhnn.xyz/lambda-school/data-science/2018/09/01/EDA.html" />
+<meta property="og:site_name" content="Johann Augustine" />
+<meta property="og:image" content="https://www.jhnn.xyz/images/NYC-harbor.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-09-01T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://www.jhnn.xyz/lambda-school/data-science/2018/09/01/EDA.html","@type":"BlogPosting","headline":"Exploratory Data Analysis","dateModified":"2018-09-01T00:00:00-05:00","datePublished":"2018-09-01T00:00:00-05:00","image":"https://www.jhnn.xyz/images/NYC-harbor.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.jhnn.xyz/lambda-school/data-science/2018/09/01/EDA.html"},"author":{"@type":"Person","name":"Johann Augustine"},"description":"First steps in exploration","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://www.jhnn.xyz/feed.xml" title="Johann Augustine" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56JKQCE3KY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56JKQCE3KY');
+</script>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Johann Augustine</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Exploratory Data Analysis</h1><p class="page-description">First steps in exploration</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2018-09-01T00:00:00-05:00" itemprop="datePublished">
+        Sep 1, 2018
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Johann Augustine</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      7 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#lambda-school">lambda-school</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#data-science">data-science</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/jhnnxyzptlk/computer-blue/tree/master/_notebooks/2018-09-01-EDA.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/jhnnxyzptlk/computer-blue/master?filepath=_notebooks%2F2018-09-01-EDA.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/jhnnxyzptlk/computer-blue/blob/master/_notebooks/2018-09-01-EDA.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Overview">Overview </a></li>
+<li class="toc-entry toc-h2"><a href="#Load-a-CSV-dataset-using-pandas-read_csv">Load a CSV dataset using pandas read_csv </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Pandas">Pandas </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Load-a-CSV-dataset-from-a-URL-using-pandas-read_csv">Load a CSV dataset from a URL using pandas read_csv </a></li>
+<li class="toc-entry toc-h4"><a href="#Load-a-CSV-dataset-from-a-local-file-using-pandas-read_csv">Load a CSV dataset from a local file using pandas read_csv </a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Use-basic-Pandas-functions-for-Exploratory-Data-Analysis-EDA">Use basic Pandas functions for Exploratory Data Analysis-EDA </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Basic-Information">Basic Information </a></li>
+<li class="toc-entry toc-h3"><a href="#Column-specific">Column-specific </a></li>
+<li class="toc-entry toc-h3"><a href="#Missing-Values">Missing Values </a></li>
+<li class="toc-entry toc-h3"><a href="#Fin">Fin </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2018-09-01-EDA.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overview">
+<a class="anchor" href="#Overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview<a class="anchor-link" href="#Overview"> </a>
+</h2>
+<blockquote>
+<p>Exploratory Data Analysis (EDA) is the critical process of conducting preliminary investigations on data in order to discover patterns, detect anomalies, test hypotheses, and validate assumptions using summary statistics and graphical representations.</p>
+</blockquote>
+<p>When we first start with a new dataset, we often perform exploratory data analysis. The discoveries that we make during this stage of the process drive how we treat our data, the models we choose, the approach we take to analyzing our data, and, in large part, the entirety of our data science methodology and next steps.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Load-a-CSV-dataset-using-pandas-read_csv">
+<a class="anchor" href="#Load-a-CSV-dataset-using-pandas-read_csv" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load a CSV dataset using pandas read_csv<a class="anchor-link" href="#Load-a-CSV-dataset-using-pandas-read_csv"> </a>
+</h2>
+<p>We will be working with data in many different forms throughout our careers. But before we can start to do anything with that data, we need to load it into our workspace. 
+</p>
+<div class="flash flash-success">
+    <svg class="octicon octicon-checklist" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M2.5 1.75a.25.25 0 01.25-.25h8.5a.25.25 0 01.25.25v7.736a.75.75 0 101.5 0V1.75A1.75 1.75 0 0011.25 0h-8.5A1.75 1.75 0 001 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 000-1.5H2.75a.25.25 0 01-.25-.25V1.75zM4.75 4a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5zM4 7.75A.75.75 0 014.75 7h2a.75.75 0 010 1.5h-2A.75.75 0 014 7.75zm11.774 3.537a.75.75 0 00-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 00-1.062 1.058l1.943 1.95a.75.75 0 001.055.008l4.557-4.45z"></path></svg>
+    <strong>Tip: </strong>Start with <a href="https://colab.research.google.com">Google colab</a> and ease your way into a working local environment on your machine. 
+</div>
+<h3 id="Pandas">
+<a class="anchor" href="#Pandas" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pandas<a class="anchor-link" href="#Pandas"> </a>
+</h3>
+<p>You are likely already familiar with the Python data analysis library pandas. We'll provide a quick overview here and then work through some examples in the next section.</p>
+<p>The pandas library includes a wide range of data analysis and manipulation tools. It also offers data structures (Series, DataFrames) that are designed to function well with a variety of data types, including tabular data, time series data, and matrix data (for example, columns with different data types) using read.csv to read files</p>
+<p>To begin, we'll look at one of the most commonly used pandas methods: read csv. This method can be used to read data in the comma separated value (csv) format: each row's values are separated by a comma, and new lines (rows) begin on the next line. A csv file can be loaded from a URL or read from a locally stored file on your device.</p>
+<p>There are many options for using read csv, as there are for several other pandas methods. To learn more about these, start with some of the official documentation at <a href="https://pandas.pydata.org/docs/">https://pandas.pydata.org/docs/</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Load-a-CSV-dataset-from-a-URL-using-pandas-read_csv">
+<a class="anchor" href="#Load-a-CSV-dataset-from-a-URL-using-pandas-read_csv" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load a CSV dataset from a URL using pandas read_csv<a class="anchor-link" href="#Load-a-CSV-dataset-from-a-URL-using-pandas-read_csv"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Set a variable to the URL you copied above</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">'https://archive.ics.uci.edu/ml/machine-learning-databases/tic-tac-toe/tic-tac-toe.data'</span>
+
+<span class="c1"># Read or load the data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Load-a-CSV-dataset-from-a-local-file-using-pandas-read_csv">
+<a class="anchor" href="#Load-a-CSV-dataset-from-a-local-file-using-pandas-read_csv" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load a CSV dataset from a local file using pandas read_csv<a class="anchor-link" href="#Load-a-CSV-dataset-from-a-local-file-using-pandas-read_csv"> </a>
+</h4>
+<p>When working with data sets, you'll find many of them conveniently stored on online at various locations (UCI Repository, Kaggle, etc.). But you'll often want to download a data set to store it on your local computer. This makes it easy to use tools on your computer to view and edit the file in addition to having a copy safely stored on your hard drive.</p>
+<p>The pandas <code>read_csv()</code> method can also read in locally saved files. Instead of providing the URL, you will use the path to the file. Think of the path like the address of the file: it's a list of directories leading to the file location. An example path might look like /Users/myname/Documents/data_science/tic-tac-toe.data where the last part of the path is the file name. To read in a local file with pandas, you can use the following code (assume pandas has been imported):</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'/home/username/Downloads/tic-tac-toe.data'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Use-basic-Pandas-functions-for-Exploratory-Data-Analysis-EDA">
+<a class="anchor" href="#Use-basic-Pandas-functions-for-Exploratory-Data-Analysis-EDA" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use basic Pandas functions for Exploratory Data Analysis-EDA<a class="anchor-link" href="#Use-basic-Pandas-functions-for-Exploratory-Data-Analysis-EDA"> </a>
+</h2>
+<p>Exploratory data analysis (EDA) is a very important part of learning to be a data scientist. And something that experienced data scientists do on a regular basis. We'll be using some of the numerous tools available in the pandas library. Earlier in the module, we learned how to load data sets into notebooks. So now that we have all this data, what do we do with it?</p>
+<h3 id="Basic-Information">
+<a class="anchor" href="#Basic-Information" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Information<a class="anchor-link" href="#Basic-Information"> </a>
+</h3>
+<p>There are a few methods to look at your DataFrame quickly and get an idea of what's inside. Here are a few of the most common with descriptions of what each method does:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">method</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>df.shape</code></td>
+<td style="text-align:left">display the size (x, y)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>df.head()</code></td>
+<td style="text-align:left">display the first n rows (default=5)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>df.tail()</code></td>
+<td style="text-align:left">display the last n rows (default=5)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>df.describe()</code></td>
+<td style="text-align:left">display the statistics of numerical data types</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>df.info()</code></td>
+<td style="text-align:left">display the number of entries (rows), number of columns, and the data types</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Column-specific">
+<a class="anchor" href="#Column-specific" aria-hidden="true"><span class="octicon octicon-link"></span></a>Column-specific<a class="anchor-link" href="#Column-specific"> </a>
+</h3>
+<p>Sometimes we don't want to look at the entire DataFrame and instead want to focus on a single column or a few columns. There are a few ways to select a column but we'll mainly use the column name. If we have a DataFrame called <code>df</code> and a column named "column_1" we could select just a single column by using <code>df["column_1"]</code>. Once we have a single column selected, we can use some of the following methods to get more information.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">method</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>df.columns</code></td>
+<td style="text-align:left">print a list of the columns</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>df['column_name']</code></td>
+<td style="text-align:left">select a single column ( returns a Series)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>df['column_name'].value_counts()</code></td>
+<td style="text-align:left">count the number of <code>object</code> and <code>boolean</code> occurrences</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>df.sort_values(by='column_name')</code></td>
+<td style="text-align:left">sort the values in the given column</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>df.drop()</code></td>
+<td style="text-align:left">remove rows or columns by specifying the label or index of the row/column</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Missing-Values">
+<a class="anchor" href="#Missing-Values" aria-hidden="true"><span class="octicon octicon-link"></span></a>Missing Values<a class="anchor-link" href="#Missing-Values"> </a>
+</h3>
+<p>There is a lot of data out there, and along with that comes the unavoidable fact that some of it will be messy. This means that there will be missing values, "not-a-number" (NaN) occurrences, and problems with zeros not being actually zero. Fortunately, there are a number of pandas methods that make dealing with the mess a little easier.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">method</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>df.isnull().sum()</code></td>
+<td style="text-align:left">count and sum the number of null occurrences (NaN or None)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>df.fillna()</code></td>
+<td style="text-align:left">fill NaN values in a variety of ways</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>df.dropna()</code></td>
+<td style="text-align:left">remove values that are NaN or None; by default removes all rows with NaNs</td>
+</tr>
+</tbody>
+</table>
+<p>The above methods cover a lot of ground but we'll work through examples using them on a data set. First, we need some data. We'll use the M&amp;Ms data set for this, because it's small and contains both numeric and Object (string) data types.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url_mms</span> <span class="o">=</span> <span class="s1">'https://tinyurl.com/mms-statistics'</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url_mms</span><span class="p">)</span>
+
+<span class="c1"># Looks at the dimensions of your data:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">816</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Looks at first 5 rows of your data:</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(816, 4)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>type</th>
+      <th>color</th>
+      <th>diameter</th>
+      <th>mass</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>peanut butter</td>
+      <td>blue</td>
+      <td>16.20</td>
+      <td>2.18</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>peanut butter</td>
+      <td>brown</td>
+      <td>16.50</td>
+      <td>2.01</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>peanut butter</td>
+      <td>orange</td>
+      <td>15.48</td>
+      <td>1.78</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>peanut butter</td>
+      <td>brown</td>
+      <td>16.32</td>
+      <td>1.98</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>peanut butter</td>
+      <td>yellow</td>
+      <td>15.59</td>
+      <td>1.62</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>df.info()</code> prints information about a DataFrame including the index dtype and columns, non-null values and memory usage:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 816 entries, 0 to 815
+Data columns (total 4 columns):
+ #   Column    Non-Null Count  Dtype  
+---  ------    --------------  -----  
+ 0   type      816 non-null    object 
+ 1   color     816 non-null    object 
+ 2   diameter  816 non-null    float64
+ 3   mass      816 non-null    float64
+dtypes: float64(2), object(2)
+memory usage: 25.6+ KB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can use describe to print out the statistics for the numeric columns using <code>df.describe()</code>:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>diameter</th>
+      <th>mass</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>816.000000</td>
+      <td>816.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>14.171912</td>
+      <td>1.419632</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.220001</td>
+      <td>0.714765</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>11.230000</td>
+      <td>0.720000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>13.220000</td>
+      <td>0.860000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>13.600000</td>
+      <td>0.920000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>15.300000</td>
+      <td>1.930000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>17.880000</td>
+      <td>3.620000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>df.columns</code> prints the column labels of the DataFrame.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index(['type', 'color', 'diameter', 'mass'], dtype='object')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Say we dont need a column any more, we can drop it with <code>df.drop</code></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">'mass'</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>type</th>
+      <th>color</th>
+      <th>diameter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>peanut butter</td>
+      <td>blue</td>
+      <td>16.20</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>peanut butter</td>
+      <td>brown</td>
+      <td>16.50</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>peanut butter</td>
+      <td>orange</td>
+      <td>15.48</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>peanut butter</td>
+      <td>brown</td>
+      <td>16.32</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>peanut butter</td>
+      <td>yellow</td>
+      <td>15.59</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And lastly say we want to look at all the different values a certain column has. We can do so with 
+<code>df['column name'].value_counts()</code></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">'type'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>plain            462
+peanut butter    201
+peanut           153
+Name: type, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Fin">
+<a class="anchor" href="#Fin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fin<a class="anchor-link" href="#Fin"> </a>
+</h3>
+<p>I don't ever remember all these techniques. So I either google what I need or head over to <a href="https://jakevdp.github.io/PythonDataScienceHandbook/">Python Data Science Handbook</a> to refresh my memory.</p>
+<p>Other major topics for EDA:</p>
+<ul>
+<li>make features</li>
+<li>Join and reshape data</li>
+<li>Explanatory Visualizations</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p></p>
+<div class="flash">
+    <svg class="octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg>
+    <strong>Note: </strong>This post is a reflection of my first week at Lambda School. For a more rigorous introduction to python, pandas and EDA, you can reference <a href="https://www.amazon.com/Python-Data-Analysis-Wrangling-IPython/dp/1491957662/ref=pd_lpo_14_t_0/137-0388884-4997641?_encoding=UTF8&amp;pd_rd_i=1491957662&amp;pd_rd_r=f83c895f-1fc3-4edd-b74e-723ab0f64044&amp;pd_rd_w=mcYQh&amp;pd_rd_wg=nIRhM&amp;pf_rd_p=337be819-13af-4fb9-8b3e-a5291c097ebb&amp;pf_rd_r=44MJ6GR5N2YKKFSYHP26&amp;psc=1&amp;refRID=44MJ6GR5N2YKKFSYHP26">Python for Data Analysis</a>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="jhnnxyzptlk/computer-blue"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/lambda-school/data-science/2018/09/01/EDA.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>A little corner on the internet</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/jhnnxyzptlk" title="jhnnxyzptlk"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/jhnnxyzptlk" title="jhnnxyzptlk"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
