@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Calculus, A quick Review | Johann Augustine</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Calculus, A quick Review" />
+<meta name="author" content="Johann Augustine" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="What is continuous change" />
+<meta property="og:description" content="What is continuous change" />
+<link rel="canonical" href="https://www.jhnn.xyz/mathematics/calculus/2019/01/02/calculus.html" />
+<meta property="og:url" content="https://www.jhnn.xyz/mathematics/calculus/2019/01/02/calculus.html" />
+<meta property="og:site_name" content="Johann Augustine" />
+<meta property="og:image" content="https://www.jhnn.xyz/images/" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-01-02T00:00:00-06:00" />
+<script type="application/ld+json">
+{"url":"https://www.jhnn.xyz/mathematics/calculus/2019/01/02/calculus.html","@type":"BlogPosting","headline":"Calculus, A quick Review","dateModified":"2019-01-02T00:00:00-06:00","datePublished":"2019-01-02T00:00:00-06:00","image":"https://www.jhnn.xyz/images/","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.jhnn.xyz/mathematics/calculus/2019/01/02/calculus.html"},"author":{"@type":"Person","name":"Johann Augustine"},"description":"What is continuous change","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://www.jhnn.xyz/feed.xml" title="Johann Augustine" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56JKQCE3KY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56JKQCE3KY');
+</script>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Johann Augustine</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Calculus, A quick Review</h1><p class="page-description">What is continuous change</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2019-01-02T00:00:00-06:00" itemprop="datePublished">
+        Jan 2, 2019
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Johann Augustine</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      5 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#mathematics">mathematics</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#calculus">calculus</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/jhnnxyzptlk/computer-blue/tree/master/_notebooks/2019-01-02-calculus.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/jhnnxyzptlk/computer-blue/master?filepath=_notebooks%2F2019-01-02-calculus.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/jhnnxyzptlk/computer-blue/blob/master/_notebooks/2019-01-02-calculus.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Overview">Overview </a></li>
+<li class="toc-entry toc-h2"><a href="#Limits-and-Continuity">Limits and Continuity </a></li>
+<li class="toc-entry toc-h2"><a href="#Derivatives">Derivatives </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Geometric-Interpretation-of-Differentiation">Geometric Interpretation of Differentiation </a></li>
+<li class="toc-entry toc-h3"><a href="#Physical-Interpretation-of-Differentiation">Physical Interpretation of Differentiation </a></li>
+<li class="toc-entry toc-h3"><a href="#Basic-properties-and-formulas">Basic properties and formulas </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Integrals">Integrals </a></li>
+<li class="toc-entry toc-h2"><a href="#The-Fundamental-Theorem-of-Calculus">The Fundamental Theorem of Calculus </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2019-01-02-calculus.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overview">
+<a class="anchor" href="#Overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview<a class="anchor-link" href="#Overview"> </a>
+</h2>
+<p>Calculus, sometimes known as infinitesimal calculus in its early days, is a mathematical subject that focuses on limits, continuity, derivatives, integrals, and infinite series. 
+</p>
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg>
+    <strong>Note: </strong><a href="https://en.wikipedia.org/wiki/History_of_calculus">History of Calculus</a>
+</div>
+We use two central ideas when dealing with calculus,  differential calculus and integral calculus. The former is concerned with instantaneous rates of change and curve slopes, whereas integral calculus is concerned with quantity accumulation and areas under or between curves.
+<blockquote>
+<p>Differential calculus can be thought of as a process of infinitely fine subtraction that is used to measure the differences between its parts.</p>
+<p>Integral Calculus can be thought of as the process of infinitely fine additions, which integrates the parts back into the original whole.</p>
+</blockquote>
+<p>Calculus, like any subject matter deserves special treatment and care when starting. Here are my favorite textbooks when I was learning calculus:- <a href="https://www.amazon.com/Calculus-4th-Michael-Spivak/dp/0914098918">Calculus by Michael Spivak</a> - <a href="https://ocw.mit.edu/courses/mathematics/18-01-single-variable-calculus-fall-2006/index.htm">MITs Single Variable Calculus</a></p>
+<p>In my opinion mathematics should be a very personal experience between the paper, pencil, mind and God. I have too many notebooks filled with mathematical equations and ideas that I have picked up through out my years.</p>
+<p>Here I will do my best to lay out the high level ideas of Calculus. Hope you enjoy.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Limits-and-Continuity">
+<a class="anchor" href="#Limits-and-Continuity" aria-hidden="true"><span class="octicon octicon-link"></span></a>Limits and Continuity<a class="anchor-link" href="#Limits-and-Continuity"> </a>
+</h2>
+<blockquote>
+<p>What does it mean to be continous</p>
+</blockquote>
+<p>Our experience in our daily lives appears to be continuous. That is, there are no abrupt changes or discontinuities in what we perceive and experience. That's great news. Imagine you're out for a beautiful walk when all of a sudden a split second disappears from the cosmos. That would be disastrous and unexpected for our experience.</p>
+<blockquote>
+<p>Note:No change in nature can ever take place “by a leap". 
+Does continuity imply infinity? Well if we imagine a number line we assume there is an infinite number of numbers. That is there is a number in every posible position on the number line, its therefore smooth and continous. Yet within the infinite there seems to be discrete amount of numbers, such as the integers. What gives? 
+</p>
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg>
+    <strong>Note: </strong>I will write more on the <code>Principal of Continuity</code> in a future blog post. 
+</div>
+A rigorous definition of continuity of real functions is usually given in a first course in calculus in terms of the idea of a limit. In mathematics, many functions have the property that their graphs can be traced with a pencil without lifting the pencil from the page. Such functions are called continuous.
+</blockquote>
+<p>Not all functions are continuous. Sometimes we cant figure out what a function is doing directly at a point. We can however see what it should be as we get closer to a limiting value.</p>
+<p>For example, $f(x) = \frac{x^2-1}{x-1}$ where, $f(1)$ is not defined</p>
+<table>
+<thead>
+<tr>
+<th>$f(0.9)$</th>
+<th>$f(0.99)$</th>
+<th>$f(0.999)$</th>
+<th>$f(1.0)$</th>
+<th>$f(1.001)$</th>
+<th>$f(1.01)$</th>
+<th>$f(1.1)$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$1.900$</td>
+<td>$1.990$</td>
+<td>$1.999$</td>
+<td>$undefined$</td>
+<td>$2.001$</td>
+<td>$2.010$</td>
+<td>$2.100$</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Derivatives">
+<a class="anchor" href="#Derivatives" aria-hidden="true"><span class="octicon octicon-link"></span></a>Derivatives<a class="anchor-link" href="#Derivatives"> </a>
+</h2>
+<blockquote>
+<p>what is a derivative?</p>
+</blockquote>
+<p><img src="https://imgs.xkcd.com/comics/newton_and_leibniz.png" alt="">
+The derivivative of a function measures the sensitivity to change of the function value (output value) with respect to a change in its argument (input value)<sup id="fnref-1" class="footnote-ref"><a href="#fn-1">1</a></sup>.</p>
+<p>What does this all mean? How can we vizualize this?</p>
+<p>We may approach this question from multiple perspectives.</p>
+<h3 id="Geometric-Interpretation-of-Differentiation">
+<a class="anchor" href="#Geometric-Interpretation-of-Differentiation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Geometric Interpretation of Differentiation<a class="anchor-link" href="#Geometric-Interpretation-of-Differentiation"> </a>
+</h3>
+<p>From a geometric point of view the derivative is the <code>slope</code> of the <code>tangent line</code> to the graph of $f(x)$. But what is a tangent line, exactly?</p>
+<blockquote>
+<p>It is the limit of the <code>secant line</code> (a line drawn between two points on the graph) as the distance
+between the two points goes to zero.</p>
+</blockquote>
+<p><img src="https://ocw.mit.edu/courses/mathematics/18-01-single-variable-calculus-fall-2006/18-01f06.jpg" alt="">
+You take the Point Q and you move it closer to P. In a more formal way but not rigorous, it is the limit of the slope of the secant line PQ as Q → P (where P fixed). The slope of PQ is represented by this graph:</p>
+<p><img src="https://lh5.googleusercontent.com/zbxAFSCDEX8ssMLsrA-c3mG1TvylnagiMZobMlMhHv-bf977pnRRuak_eBDgdtteVJm8hYgOVzNoJFBQUDQRCo2qwa3ljGPMsI02GipnY7yCL4Yr5guXB5lu0Q" alt=""></p>
+<p>As $Q$ approaches $P$ – i.e., as $x$ approaches $0$ from both sides – this quantity becomes the <code>instantaneous rate of change</code> at $P$, defined by:</p>
+<p>
+$$\lim_{\Delta x \to 0} \frac{\Delta f}{\Delta x} = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x} = f'(x)$$
+
+</p>
+<div class="flash flash-success">
+    <svg class="octicon octicon-checklist octicon octicon-checklist" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M2.5 1.75a.25.25 0 01.25-.25h8.5a.25.25 0 01.25.25v7.736a.75.75 0 101.5 0V1.75A1.75 1.75 0 0011.25 0h-8.5A1.75 1.75 0 001 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 000-1.5H2.75a.25.25 0 01-.25-.25V1.75zM4.75 4a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5zM4 7.75A.75.75 0 014.75 7h2a.75.75 0 010 1.5h-2A.75.75 0 014 7.75zm11.774 3.537a.75.75 0 00-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 00-1.062 1.058l1.943 1.95a.75.75 0 001.055.008l4.557-4.45z"></path></svg>
+    <strong>Tip: </strong>This is called the difference quotient
+</div>
+<h3 id="Physical-Interpretation-of-Differentiation">
+<a class="anchor" href="#Physical-Interpretation-of-Differentiation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Physical Interpretation of Differentiation<a class="anchor-link" href="#Physical-Interpretation-of-Differentiation"> </a>
+</h3>
+<p>One interpretation everyone is familar with is driving a car. You step on the pedal, the car accelerates. Your odometer tells you how fast you are going at any given moment in time. That seems kind of odd since the difference quotient implies the average of two points. Theres no trickery here, your odometer is calculating your speed with two points really really close together.</p>
+<p>Check out <a href="https://youtu.be/9vKqVkMQHKk">The paradox of the derivative</a> on youtube.</p>
+<h3 id="Basic-properties-and-formulas">
+<a class="anchor" href="#Basic-properties-and-formulas" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic properties and formulas<a class="anchor-link" href="#Basic-properties-and-formulas"> </a>
+</h3>
+<p>Using the definition of the derivative, it is possible to establish the <a href="http://tutorial.math.lamar.edu/getfile.aspx?file=B,44,N">following</a> derivative formulas.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Integrals">
+<a class="anchor" href="#Integrals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Integrals<a class="anchor-link" href="#Integrals"> </a>
+</h2>
+<blockquote>
+<p>Integration is the process of finding the antiderivative of a function.</p>
+</blockquote>
+<p>Integration can be used to solve the area of an arbitrary shape, the length of a curve, and the volume of a solid, among others.</p>
+<blockquote>
+<p>tip:The Area is a visualization technique for learning
+<img src="https://image.shutterstock.com/image-vector/definite-integral-using-graph-on-260nw-1691608849.jpg" alt=""></p>
+</blockquote>
+<p>$\int f(x) \,dx$</p>
+<p>From a geometric point of view, the integral can be interpreted as the area under the curve of the mathematical function $f(x)$ plotted as a function of $x$.</p>
+<p>You may imagine drawing a huge number of blocks to approximate the area under a complex curve, with more blocks yielding a better solution. The integral provides a mathematical method for drawing an unlimited number of blocks and obtaining an exact analytical expression for the area.</p>
+<p><img src="https://image.shutterstock.com/image-vector/vector-graph-demonstration-integration-mathematical-600w-1883366197.jpg" alt=""></p>
+<p>That's crucial for geometry, and even more so for the physical sciences, where the definitions of many physical phenomena, such as the area under a curve, can be expressed mathematically.</p>
+<p>The area of a small block under a curve can be thought of as the width of the strip multiplied by (i.e., weighted by) the height of the strip. Many features of continuous substances are dependent on weighted sums, which must be infinite weighted sums to be correct - a challenge tailor-made for the integral.
+</p>
+<div class="flash flash-success">
+    <svg class="octicon octicon-checklist octicon octicon-checklist octicon octicon-checklist" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M2.5 1.75a.25.25 0 01.25-.25h8.5a.25.25 0 01.25.25v7.736a.75.75 0 101.5 0V1.75A1.75 1.75 0 0011.25 0h-8.5A1.75 1.75 0 001 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 000-1.5H2.75a.25.25 0 01-.25-.25V1.75zM4.75 4a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5zM4 7.75A.75.75 0 014.75 7h2a.75.75 0 010 1.5h-2A.75.75 0 014 7.75zm11.774 3.537a.75.75 0 00-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 00-1.062 1.058l1.943 1.95a.75.75 0 001.055.008l4.557-4.45z"></path></svg>
+    <strong>Tip: </strong><code>Riemann</code> and <code>Lebesgue</code> integrals are the most widely used definitions of the integral. 
+</div>
+This is a highly oversimplified overview of integrals. You can check out this video from 3b1b on <a href="https://youtu.be/rfG8ce4nNh0">integrals</a>.
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-Fundamental-Theorem-of-Calculus">
+<a class="anchor" href="#The-Fundamental-Theorem-of-Calculus" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Fundamental Theorem of Calculus<a class="anchor-link" href="#The-Fundamental-Theorem-of-Calculus"> </a>
+</h2>
+<p>The two branches are connected by the fundamental theorem of calculus, which shows how a definite integral is calculated by using its antiderivative (a function whose rate of change, or derivative, equals the function being integrated).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p></p>
+<div class="footnotes"><p id="fn-1">1. Wikipedia-Derivative <a href="https://en.m.wikipedia.org/wiki/Derivative">link</a>!<a href="#fnref-1" class="footnote footnotes">↩</a></p></div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="jhnnxyzptlk/computer-blue"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/mathematics/calculus/2019/01/02/calculus.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>A little corner on the internet</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/jhnnxyzptlk" title="jhnnxyzptlk"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/jhnnxyzptlk" title="jhnnxyzptlk"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
