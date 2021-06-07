@@ -112,7 +112,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      5 min read
+      7 min read
     
 </span></p>
 
@@ -155,6 +155,7 @@ window.onload = wrap_img;
   <div class="post-content e-content" itemprop="articleBody">
     <ul class="section-nav">
 <li class="toc-entry toc-h2"><a href="#Overview">Overview </a></li>
+<li class="toc-entry toc-h2"><a href="#Functions">Functions </a></li>
 <li class="toc-entry toc-h2"><a href="#Limits-and-Continuity">Limits and Continuity </a></li>
 <li class="toc-entry toc-h2"><a href="#Derivatives">Derivatives </a>
 <ul>
@@ -180,20 +181,49 @@ window.onload = wrap_img;
 <h2 id="Overview">
 <a class="anchor" href="#Overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview<a class="anchor-link" href="#Overview"> </a>
 </h2>
-<p>Calculus, sometimes known as infinitesimal calculus in its early days, is a mathematical subject that focuses on limits, continuity, derivatives, integrals, and infinite series. 
-</p>
-<div class="flash">
-    <svg class="octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg>
-    <strong>Note: </strong><a href="https://en.wikipedia.org/wiki/History_of_calculus">History of Calculus</a>
+<p>Calculus, sometimes known as infinitesimal calculus in its early days, is a mathematical subject that focuses on:</p>
+<ul>
+<li>functions</li>
+<li>limits </li>
+<li>continuity </li>
+<li>derivatives </li>
+<li>integrals
+<div class="flash flash-success">
+    <svg class="octicon octicon-checklist octicon octicon-checklist" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M2.5 1.75a.25.25 0 01.25-.25h8.5a.25.25 0 01.25.25v7.736a.75.75 0 101.5 0V1.75A1.75 1.75 0 0011.25 0h-8.5A1.75 1.75 0 001 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 000-1.5H2.75a.25.25 0 01-.25-.25V1.75zM4.75 4a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5zM4 7.75A.75.75 0 014.75 7h2a.75.75 0 010 1.5h-2A.75.75 0 014 7.75zm11.774 3.537a.75.75 0 00-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 00-1.062 1.058l1.943 1.95a.75.75 0 001.055.008l4.557-4.45z"></path></svg>
+    <strong>Tip: </strong><a href="https://en.wikipedia.org/wiki/History_of_calculus">History of Calculus</a>
 </div>
-We use two central ideas when dealing with calculus,  differential calculus and integral calculus. The former is concerned with instantaneous rates of change and curve slopes, whereas integral calculus is concerned with quantity accumulation and areas under or between curves.
-<blockquote>
+We use two central ideas when dealing with calculus,  differential calculus and integral calculus. The former is concerned with instantaneous rates of change and curve slopes, whereas integral calculus is concerned with quantity accumulation and areas under or between curves. <blockquote>
 <p>Differential calculus can be thought of as a process of infinitely fine subtraction that is used to measure the differences between its parts.</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
 <p>Integral Calculus can be thought of as the process of infinitely fine additions, which integrates the parts back into the original whole.</p>
 </blockquote>
 <p>Calculus, like any subject matter deserves special treatment and care when starting. Here are my favorite textbooks when I was learning calculus:- <a href="https://www.amazon.com/Calculus-4th-Michael-Spivak/dp/0914098918">Calculus by Michael Spivak</a> - <a href="https://ocw.mit.edu/courses/mathematics/18-01-single-variable-calculus-fall-2006/index.htm">MITs Single Variable Calculus</a></p>
-<p>In my opinion mathematics should be a very personal experience between the paper, pencil, mind and God. I have too many notebooks filled with mathematical equations and ideas that I have picked up through out my years.</p>
+<p>In my opinion mathematics should be a very personal experience between the paper, pencil, Mind and God. I have too many notebooks filled with mathematical equations and ideas that I have picked up through out my years.</p>
 <p>Here I will do my best to lay out the high level ideas of Calculus. Hope you enjoy.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Functions">
+<a class="anchor" href="#Functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Functions<a class="anchor-link" href="#Functions"> </a>
+</h2>
+<p>In calculus, we study quantities that change. Quantities that change are called variables.</p>
+<p>Temperature, for example, is a variable. Throughout the day, it varies. The speed at which you drive your car is varied. 
+This is why calculus can be both interesting and practical. It can be applied to any changing variable. We perceive not only changing quantities in nature. We can also notice that some quantities are related in some way.</p>
+<p>Suppose the value of a variable quantity $y$ depends solely on the value of another variable quantity $x$. This relationship is called a <code>function</code> if for each input $x$ there is exactly one output $y$.</p>
+<p>In a more formal way write $y = f(x)$, and say that <code>y is a function of x</code>. We call $f$ the <code>function</code>, $x$ the <code>independent variable</code>, and $y$ the <code>dependent variable</code>.</p>
+<p>More ways to describe a funtion:</p>
+<ul>
+<li>The <code>x-value</code> is called an <code>input</code>, and the <code>y-value</code> an <code>output</code>. </li>
+<li>The <code>set</code> of all <code>inputs</code> is called the <code>domain</code> of $f$ ; the <code>set</code> of all <code>outputs</code> is called the <code>range</code> of $f$.</li>
+</ul>
+<p>Now theres a whole zoo of functions that will take you a lifetime to explore. We won't be going over them here. But <a href="https://en.wikipedia.org/wiki/List_of_mathematical_functions">here</a> is a nice place to start.</p>
 
 </div>
 </div>
@@ -213,7 +243,7 @@ We use two central ideas when dealing with calculus,  differential calculus and 
 Does continuity imply infinity? Well if we imagine a number line we assume there is an infinite number of numbers. That is there is a number in every posible position on the number line, its therefore smooth and continous. Yet within the infinite there seems to be discrete amount of numbers, such as the integers. What gives? 
 </p>
 <div class="flash">
-    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg>
+    <svg class="octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg>
     <strong>Note: </strong>I will write more on the <code>Principal of Continuity</code> in a future blog post. 
 </div>
 A rigorous definition of continuity of real functions is usually given in a first course in calculus in terms of the idea of a limit. In mathematics, many functions have the property that their graphs can be traced with a pencil without lifting the pencil from the page. Such functions are called continuous.
@@ -278,7 +308,7 @@ $$\lim_{\Delta x \to 0} \frac{\Delta f}{\Delta x} = \lim_{\Delta x \to 0} \frac{
 
 </p>
 <div class="flash flash-success">
-    <svg class="octicon octicon-checklist octicon octicon-checklist" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M2.5 1.75a.25.25 0 01.25-.25h8.5a.25.25 0 01.25.25v7.736a.75.75 0 101.5 0V1.75A1.75 1.75 0 0011.25 0h-8.5A1.75 1.75 0 001 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 000-1.5H2.75a.25.25 0 01-.25-.25V1.75zM4.75 4a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5zM4 7.75A.75.75 0 014.75 7h2a.75.75 0 010 1.5h-2A.75.75 0 014 7.75zm11.774 3.537a.75.75 0 00-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 00-1.062 1.058l1.943 1.95a.75.75 0 001.055.008l4.557-4.45z"></path></svg>
+    <svg class="octicon octicon-checklist octicon octicon-checklist octicon octicon-checklist" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M2.5 1.75a.25.25 0 01.25-.25h8.5a.25.25 0 01.25.25v7.736a.75.75 0 101.5 0V1.75A1.75 1.75 0 0011.25 0h-8.5A1.75 1.75 0 001 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 000-1.5H2.75a.25.25 0 01-.25-.25V1.75zM4.75 4a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5zM4 7.75A.75.75 0 014.75 7h2a.75.75 0 010 1.5h-2A.75.75 0 014 7.75zm11.774 3.537a.75.75 0 00-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 00-1.062 1.058l1.943 1.95a.75.75 0 001.055.008l4.557-4.45z"></path></svg>
     <strong>Tip: </strong>This is called the difference quotient
 </div>
 <h3 id="Physical-Interpretation-of-Differentiation">
@@ -306,17 +336,16 @@ $$\lim_{\Delta x \to 0} \frac{\Delta f}{\Delta x} = \lim_{\Delta x \to 0} \frac{
 <p>Integration can be used to solve the area of an arbitrary shape, the length of a curve, and the volume of a solid, among others.</p>
 <blockquote>
 <p>tip:The Area is a visualization technique for learning
-<img src="https://image.shutterstock.com/image-vector/definite-integral-using-graph-on-260nw-1691608849.jpg" alt=""></p>
+<img src="https://www.intmath.com/applications-integration/svg/svgphp-area-under-curve-2-s0.svg" alt=""></p>
 </blockquote>
-<p>$\int f(x) \,dx$</p>
+<p>We write $\int f(x) \,dx$ to find the integral.</p>
 <p>From a geometric point of view, the integral can be interpreted as the area under the curve of the mathematical function $f(x)$ plotted as a function of $x$.</p>
 <p>You may imagine drawing a huge number of blocks to approximate the area under a complex curve, with more blocks yielding a better solution. The integral provides a mathematical method for drawing an unlimited number of blocks and obtaining an exact analytical expression for the area.</p>
-<p><img src="https://image.shutterstock.com/image-vector/vector-graph-demonstration-integration-mathematical-600w-1883366197.jpg" alt=""></p>
 <p>That's crucial for geometry, and even more so for the physical sciences, where the definitions of many physical phenomena, such as the area under a curve, can be expressed mathematically.</p>
 <p>The area of a small block under a curve can be thought of as the width of the strip multiplied by (i.e., weighted by) the height of the strip. Many features of continuous substances are dependent on weighted sums, which must be infinite weighted sums to be correct - a challenge tailor-made for the integral.
 </p>
 <div class="flash flash-success">
-    <svg class="octicon octicon-checklist octicon octicon-checklist octicon octicon-checklist" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M2.5 1.75a.25.25 0 01.25-.25h8.5a.25.25 0 01.25.25v7.736a.75.75 0 101.5 0V1.75A1.75 1.75 0 0011.25 0h-8.5A1.75 1.75 0 001 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 000-1.5H2.75a.25.25 0 01-.25-.25V1.75zM4.75 4a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5zM4 7.75A.75.75 0 014.75 7h2a.75.75 0 010 1.5h-2A.75.75 0 014 7.75zm11.774 3.537a.75.75 0 00-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 00-1.062 1.058l1.943 1.95a.75.75 0 001.055.008l4.557-4.45z"></path></svg>
+    <svg class="octicon octicon-checklist octicon octicon-checklist octicon octicon-checklist octicon octicon-checklist" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M2.5 1.75a.25.25 0 01.25-.25h8.5a.25.25 0 01.25.25v7.736a.75.75 0 101.5 0V1.75A1.75 1.75 0 0011.25 0h-8.5A1.75 1.75 0 001 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 000-1.5H2.75a.25.25 0 01-.25-.25V1.75zM4.75 4a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5zM4 7.75A.75.75 0 014.75 7h2a.75.75 0 010 1.5h-2A.75.75 0 014 7.75zm11.774 3.537a.75.75 0 00-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 00-1.062 1.058l1.943 1.95a.75.75 0 001.055.008l4.557-4.45z"></path></svg>
     <strong>Tip: </strong><code>Riemann</code> and <code>Lebesgue</code> integrals are the most widely used definitions of the integral. 
 </div>
 This is a highly oversimplified overview of integrals. You can check out this video from 3b1b on <a href="https://youtu.be/rfG8ce4nNh0">integrals</a>.
@@ -327,10 +356,18 @@ This is a highly oversimplified overview of integrals. You can check out this vi
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://www.intmath.com/applications-integration/svg/svgphp-area-under-curve-2-s0.svg" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="The-Fundamental-Theorem-of-Calculus">
 <a class="anchor" href="#The-Fundamental-Theorem-of-Calculus" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Fundamental Theorem of Calculus<a class="anchor-link" href="#The-Fundamental-Theorem-of-Calculus"> </a>
 </h2>
-<p>The two branches are connected by the fundamental theorem of calculus, which shows how a definite integral is calculated by using its antiderivative (a function whose rate of change, or derivative, equals the function being integrated).</p>
+<p>The two branches are connected by the fundamental theorem of calculus, which shows how the definite integral is calculated by using its antiderivative (a function whose rate of change, or derivative, equals the function being integrated).</p>
 
 </div>
 </div>
