@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Representing Numbers | Johann Augustine</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Representing Numbers" />
+<meta name="author" content="Johann Augustine" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Representation of real numbers on the computer" />
+<meta property="og:description" content="Representation of real numbers on the computer" />
+<link rel="canonical" href="https://www.jhnn.xyz/mathematics/computer-science/python/2019/11/15/representing-numbers.html" />
+<meta property="og:url" content="https://www.jhnn.xyz/mathematics/computer-science/python/2019/11/15/representing-numbers.html" />
+<meta property="og:site_name" content="Johann Augustine" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-15T00:00:00-06:00" />
+<script type="application/ld+json">
+{"url":"https://www.jhnn.xyz/mathematics/computer-science/python/2019/11/15/representing-numbers.html","@type":"BlogPosting","headline":"Representing Numbers","dateModified":"2019-11-15T00:00:00-06:00","datePublished":"2019-11-15T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.jhnn.xyz/mathematics/computer-science/python/2019/11/15/representing-numbers.html"},"author":{"@type":"Person","name":"Johann Augustine"},"description":"Representation of real numbers on the computer","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://www.jhnn.xyz/feed.xml" title="Johann Augustine" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56JKQCE3KY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56JKQCE3KY');
+</script>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Johann Augustine</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Representing Numbers</h1><p class="page-description">Representation of real numbers on the computer</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2019-11-15T00:00:00-06:00" itemprop="datePublished">
+        Nov 15, 2019
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Johann Augustine</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#mathematics">mathematics</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#computer-science">computer-science</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#python">python</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/jhnnxyzptlk/computer-blue/tree/master/_notebooks/2019-11-15-representing-numbers.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/jhnnxyzptlk/computer-blue/master?filepath=_notebooks%2F2019-11-15-representing-numbers.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/jhnnxyzptlk/computer-blue/blob/master/_notebooks/2019-11-15-representing-numbers.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Overview">Overview </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#BASE-N-AND-BINARY">BASE-N AND BINARY </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Representing-Real-Numbers">Representing Real Numbers </a></li>
+<li class="toc-entry toc-h2"><a href="#How-does-this-work-in-Python">How does this work in Python </a></li>
+<li class="toc-entry toc-h2"><a href="#Floating-point-Approximations:">Floating-point Approximations: </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2019-11-15-representing-numbers.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overview">
+<a class="anchor" href="#Overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview<a class="anchor-link" href="#Overview"> </a>
+</h2>
+<p>In our day to day lives we humans use at least two distinct number systems: The Decimal system, <code>Base 10</code>, and <code>base 60</code>, to measure time. Computers on the other hand use binary, <code>base 2</code>, number system to represent continous quantities with discrete approximations. When dealing with any kind of digital electronics that uses numbers, it's critical to consider the various ways in which numbers are expressed in these systems.</p>
+<h3 id="BASE-N-AND-BINARY">
+<a class="anchor" href="#BASE-N-AND-BINARY" aria-hidden="true"><span class="octicon octicon-link"></span></a>BASE-N AND BINARY<a class="anchor-link" href="#BASE-N-AND-BINARY"> </a>
+</h3>
+<p>The decimal system is a number representation system that you learned in grade school. An integer in the decimal system is measured by a sequence of digits ranging from 0 to 9, with each digit representing the coefficient for a power of ten.</p>
+<blockquote>
+<p>$11 = 1*10^1 + 1*10^0$</p>
+</blockquote>
+<p>Numbers, or any type of data, are interpreted by computers as <code>base-2</code> or binary numbers. The only digits used in binary are 0 and 1, and each digit is the coefficient of a power of two. The digits in a binary number are often referred to as bits. It's important to remember that binary numbers are still numbers, and the processes for adding and multiplying them are the same as you learned in elementary school.</p>
+<blockquote>
+<p>$11 = 1*2^3 + 0*2^2 + 1*2^1 + 1*2^0 = 1011_2$</p>
+</blockquote>
+<p>In contrast to humans, who can abstract numbers to arbitrarily large values, computers have a set number of bits that they can store at one time. A 32-bit machine, for example, can only display and process 32-digit binary numbers.</p>
+<p>Representing fractional parts of numbers this way, however, is not nearly as well-behaved as representing integers. For instance, writing the fraction $1/3$ in binary requires infinitely many digits:$0.010101...$</p>
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg>
+    <strong>Note: </strong>0.99999…. does not, and will never equal to 1. Stop embarrassing yourself. 
+</div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Representing-Real-Numbers">
+<a class="anchor" href="#Representing-Real-Numbers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Representing Real Numbers<a class="anchor-link" href="#Representing-Real-Numbers"> </a>
+</h2>
+<p>For any given device, the number of bits is normally fixed. We can't do important engineering calculations with binary representation because the range and precision of numbers are inadequate. We use floating point numbers, or floats for short, to achieve the required range of values for the same number of bits. By far the most common format for storing floating-point numbers is provided by the <a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754 standard</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="How-does-this-work-in-Python">
+<a class="anchor" href="#How-does-this-work-in-Python" aria-hidden="true"><span class="octicon octicon-link"></span></a>How does this work in Python<a class="anchor-link" href="#How-does-this-work-in-Python"> </a>
+</h2>
+<p>We'll start with something simple like The Integers.</p>
+<p>Python has two internal representations for numbers. The conversion between these two is automatic and seamless. Python will typically employ <code>4-byte</code> or <code>8-byte</code> integer values for tiny numbers. The details are buried in the internals of CPython.</p>
+<p>Lets say we want to know how many ways to permute a standard deck of 52 cards. To compute such a large number we will use the factorial function from the <code>math</code> module.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">52</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>80658175170943878571660636856403766975289505440883277824000000000000</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Thats a big numbuner. We are blessed that we do not have to deal with the internals of declairing our integers like in <code>C</code>. You dont notice the switch when you compute this but python used small integers to calculate the the first 10 factorials or so. After that, it had to switch to larger integers.</p>
+<p>We can look at the details on the internals of integers like so:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>63.0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">int_info</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>sys.int_info(bits_per_digit=30, sizeof_digit=4)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What we see here is the <code>sys.maxsize</code> value  the largest of the small integer values. We computed the log to <code>base-2</code> to find out how many bits are required for this number. Which is a <code>63-bit</code> value.</p>
+<p>The values in <code>sys.int_info</code> tell us that the large integers are a sequence of 30-bit digits, and each of these digits occupies 4 bytes.</p>
+<p>So a large number like $52!$ consists of 8 of these 30-bit size digits. Instead of the commonly used symbols for <code>base-10</code> numbers, we need $2^{30}$ distinct symbols for each digit of these large numbers.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Floating-point-Approximations:">
+<a class="anchor" href="#Floating-point-Approximations:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Floating-point Approximations:<a class="anchor-link" href="#Floating-point-Approximations:"> </a>
+</h2>
+<p>Now in order to deal with <a href="https://en.wikipedia.org/wiki/Real_number">real</a> numbers on a computer we need to approximate. Computers only have a certain number of bits that makes dealing with real numbers problamatic.</p>
+<p><a href="https://docs.python.org/3/tutorial/floatingpoint.html">https://docs.python.org/3/tutorial/floatingpoint.html</a></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.30000000000000004</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">==</span> <span class="mf">0.3</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>False</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="jhnnxyzptlk/computer-blue"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/mathematics/computer-science/python/2019/11/15/representing-numbers.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>A little corner on the internet</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/jhnnxyzptlk" title="jhnnxyzptlk"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/jhnnxyzptlk" title="jhnnxyzptlk"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
